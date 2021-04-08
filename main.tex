@@ -1,0 +1,62 @@
+%% Requires compilation with XeLaTeX or LuaLaTeX
+\documentclass[10pt,xcolor={table,dvipsnames},t]{beamer}
+\usetheme{UCBerkeley}
+
+\title[Your Short Title]{Templates Part Trois}
+\subtitle{Templates with a wee bit of inheritance}
+\author{Keith Lancaster, Ph.D.}
+\institute{Department of Computer Science and Engineering}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\section{Templates Inheriting from Templates}
+\begin{frame}[fragile]{Basic Inheritance}
+\large
+Templates can inherit from other templates. \\  \textit{This is not the same as specialization}, where you 
+are trying to create a version of the template to handle particular data types.
+\vspace{1cm}
+\lstset{
+  xleftmargin=.2\textwidth, xrightmargin=.2\textwidth
+}
+\begin{lstlisting}[language=C++]
+template<typename T, size_t S>
+class Array1DSpecial : public Array1D<T,S> {
+    // template body
+}
+\end{lstlisting}
+
+\end{frame}
+\begin{frame}[c]{Templates Inheriting from Concrete Classes}
+\begin{itemize}
+	\item You may encounter a situation where you have multiple related template categories
+    \item The templates may have common traits, such as name, or common functions
+    \item If the common traits are related to the common template parameters, then
+    you can use inheritance from a base \textit{template}
+    \item If on the other hand, \textit{the common traits are independent of the parameters},
+    you can extract these to a common base class (that is \textit{not} a template).
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[c]{Inheriting from an Interface}
+\begin{itemize}
+	\item The base class does not need to be concrete. You can have a template
+	inherit from an interface.
+	\item This works just as with standard classes: all templates that inherit from the
+	interface must implement the virtual functions
+\end{itemize}
+
+
+\end{frame}
+\begin{frame}[c]{And now some code..}
+
+\normalsize 
+\url{https://github.com/cpe-unr/cs202-template-inheritance-demo}
+\end{frame}
+\end{document}
